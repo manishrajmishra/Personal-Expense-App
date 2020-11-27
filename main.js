@@ -48,7 +48,7 @@ const allExpenses = [];
 
         //set the heading element to totalExpense
         const someText = `Total: ${toatalExpense}`
-        headingl.textContent = toatalExpense;
+        headingl.textContent = someText;
 
         //Show the table here
         const data1 = allExpenses[0];
