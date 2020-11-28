@@ -49,19 +49,16 @@ const allExpenses = [];
         //set the heading element to totalExpense
         const someText = `Total: ${toatalExpense}`
         headingl.textContent = someText;
+        
+        const allExpenseHtml = allExpenses.map(expense => {
+            return `<div> ${expense.amount} :: ${expense.desc} </div>`
+        });
 
-        //Show the table here
-        const data1 = allExpenses[0];
-        const data2 = allExpenses[1];
+        const joinedAllExpreseHtml = allExpenseHtml.join(" ");
 
-        const data1Text = ` ${data1.amount} :: ${data1.desc}`;
-        const data2Text = ` ${data2.amount} :: ${data2.desc}`;
+        console.log(joinedAllExpreseHtml);
 
-        const tableText = `
-        <div>${data1Text}</div>
-        <div>${data2Text}</div>
-        `
-        expenseTablel.innerHTML = tableText;
+        expenseTablel.innerHTML = allExpenseHtml;
     }
 
 //Listen to click event
