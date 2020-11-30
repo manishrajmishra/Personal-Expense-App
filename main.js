@@ -13,11 +13,10 @@ const expenseTableEl = document.querySelector('#expenseTable');
 // init value of expense at 0
 let totalExpense = 0;
 
-// set the heading element to total Expense
-headingEl.textContent = totalExpense;
+
 
 // allExpenses at one place
-const allExpenses = [];
+let allExpenses = [];
 
 // onButtonClick add inputAmount to totalExpense
 function addExpenseToTotal() {
@@ -46,10 +45,12 @@ function addExpenseToTotal() {
     inputElement.value = '';
     inputDescEl.value = '';
 
-    // set the heading element to totalExpense
-    const someText = `Total: ${totalExpense}`;
-    headingEl.textContent = someText;
+    // set the heading element to total Expense
+    headingEl.textContent = totalExpense;
 
+    // set the heading element to totalExpense
+    const someText = `Total: ₹ ${totalExpense}`;
+    headingEl.textContent = someText;
     renderList(allExpenses);
 }
 // getting the btn element
@@ -69,14 +70,15 @@ function getDateString(momento) {
 }
 
 // Delete Items
-function deleteItem(dateValue) {
-    // const newArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
-    const newArr = allExpenses.filter(expense => {
-        if(expense.moment.valueOf() !== dateValue){
-            return expense;
-        }
-    });
-    renderList(newArr);
+function deleteItem(dateValue, amount) {
+    const newArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
+                // subtract the totalexpense when it is deleted that value to totalExpense
+                totalExpense = totalExpense - amount;
+                // set the heading element to total Expense
+                const someText = `Total: ₹ ${totalExpense}`;
+                headingEl.textContent = someText;
+                renderList(newArr);
+				allExpenses = [...newArr];
     }
     
 // View Layer
@@ -100,7 +102,7 @@ function createListItem({ desc, amount, moment }) {
                     <button 
                         type="button" 
                         class="btn btn-outline-danger btn-sm"
-                        onclick="deleteItem(${moment.valueOf()})"
+                        onclick="deleteItem(${moment.valueOf()}, ${amount})"
                         >
                         <i class="fas fa-trash-alt"></i>
                     </button>
