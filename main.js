@@ -42,6 +42,10 @@ function addExpenseToTotal() {
     // add that value to totalExpense
     totalExpense = totalExpense + expense;
 
+    // making blank after adding the elemen
+    inputElement.value = '';
+    inputDescEl.value = '';
+
     // set the heading element to totalExpense
     const someText = `Total: ${totalExpense}`;
     headingEl.textContent = someText;
@@ -66,10 +70,15 @@ function getDateString(momento) {
 
 // Delete Items
 function deleteItem(dateValue) {
-    const newArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
+    // const newArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue);
+    const newArr = allExpenses.filter(expense => {
+        if(expense.moment.valueOf() !== dateValue){
+            return expense;
+        }
+    });
     renderList(newArr);
-}
-
+    }
+    
 // View Layer
 function renderList(arrOfList) {
     const allExpenseHTML = arrOfList.map(expense => createListItem(expense));
